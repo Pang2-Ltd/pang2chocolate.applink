@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>App Download</title>
+  <script>
+    window.onload = function() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // 1. 플레이스토어 / 앱스토어 링크
+      var androidUrl = "https://play.google.com/store/apps/details?id=com.pang2chocolate.pang2chocolate";
+      var iosUrl     = "https://apps.apple.com/app/id6801701370";
+      var fallbackUrl = "https://www.pang2chocolate.com/";
+
+      // 2. iOS 판별
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href = iosUrl;
+      }
+      // 3. 안드로이드 판별
+      else if (/android/i.test(userAgent)) {
+        window.location.href = androidUrl;
+      }
+      // 4. 기타 PC
+      else {
+        window.location.href = fallbackUrl;
+      }
+    };
+  </script>
+</head>
+<body>
+  <p style="text-align: center; margin-top: 50px; font-family: sans-serif;">
+    스토어로 이동 중입니다...
+  </p>
+</body>
+</html>
