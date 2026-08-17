@@ -2,49 +2,59 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  
   <title>팽이초콜릿</title>
-  <!-- Open Graph 메타 태그 (카카오톡, 페이스북, 인스타그램 등) -->
+  
+  <!-- Open Graph 메타 태그 -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://pang2chocolate.github.io/pang2chocolate/" />
+  <meta property="og:url" content="https://pang2chocolate-eng.github.io/pang2chocolate.applink/" />
   <meta property="og:title" content="팽이초콜릿" />
   <meta property="og:description" content="팽이는 함께 돌려야 더 재밌어!" />
-  <meta property="og:image" content="https://pang2chocolate.github.io/pang2chocolate/images/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  썸내일
-  <meta property="og:image" content="https://pang2chocolate-eng.github.io/pang2chocolate.applink/배경화면.png" />
+  
+  <!-- 메인이미지 mainimage.png 경로 적용 -->
+  <meta property="og:image" content="https://pang2chocolate-eng.github.io/pang2chocolate.applink/mainimage.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   
   <script>
-    window.onload = function() {
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    (function() {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var packageName = "com.pang2chocolate.pang2chocolate";
 
-      // 1. 플레이스토어 / 앱스토어 링크
-      var androidUrl = "https://play.google.com/store/apps/details?id=com.pang2chocolate.pang2chocolate";
-      var iosUrl     = "https://apps.apple.com/app/id6801701370";
-      var fallbackUrl = "https://www.pang2chocolate.com/";
+      // 1. iOS 감지
+      if (/iPhone|iPad|iPod/i.test(ua) && !window.MSStream) {
+        window.location.href = "https://apps.apple.com/app/id6801701370";
+      } 
+      // 2. 안드로이드 감지 (Intent 스킴 적용)
+      else if (/android/i.test(ua)) {
+        var intentUrl = "intent://details?id=" + packageName + "#Intent;scheme=market;package=com.android.vending;end;";
+        var webUrl = "https://play.google.com/store/apps/details?id=" + packageName;
 
-      // 2. iOS 판별
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = iosUrl;
-      }
-      // 3. 안드로이드 판별
-      else if (/android/i.test(userAgent)) {
-        window.location.href = androidUrl;
-      }
-      // 4. 기타 PC
+        try {
+          window.location.href = intentUrl;
+        } catch (e) {
+          window.location.href = webUrl;
+        }
+      } 
+      // 3. PC 환경
       else {
-        window.location.href = fallbackUrl;
+        window.location.href = "https://www.pang2chocolate.com/";
       }
-    };
+    })();
   </script>
 </head>
 <body>
-  <p style="text-align: center; margin-top: 50px; font-family: sans-serif;">
-    스토어로 이동 중입니다...
-  </p>
+  <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
+    <p>스토어로 이동 중입니다...</p>
+    <p style="font-size: 13px; color: #888;">
+      자동으로 이동하지 않을 경우 
+      <a id="manual-link" href="https://play.google.com/store/apps/details?id=com.pang2chocolate.pang2chocolate" style="color: #0066cc;">여기</a>를 눌러주세요.
+    </p>
+  </div>
+
+  <script>
+    if (/android/i.test(navigator.userAgent)) {
+      document.getElementById("manual-link").href = "intent://details?id=com.pang2chocolate.pang2chocolate#Intent;scheme=market;package=com.android.vending;end;";
+    }
+  </script>
 </body>
 </html>
