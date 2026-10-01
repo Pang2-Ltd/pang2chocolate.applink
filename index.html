@@ -6,12 +6,12 @@
   
   <!-- Open Graph 메타 태그 -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://pang2chocolate-eng.github.io/pang2chocolate.applink/" />
+  <meta property="og:url" content="https://pang2-ltd.github.io/pang2chocolate.applink/" />
   <meta property="og:title" content="팽이초콜릿" />
   <meta property="og:description" content="팽이는 함께 돌려야 더 재밌어!" />
   
   <!-- 메인이미지 mainimage.png 경로 적용 -->
-  <meta property="og:image" content="https://pang2chocolate-eng.github.io/pang2chocolate.applink/mainimage.png" />
+  <meta property="og:image" content="https://pang2-ltd.github.io/pang2chocolate.applink/mainimage.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   
@@ -19,15 +19,6 @@
     (function() {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
       var packageName = "com.pang2chocolate.pang2chocolate";
-
-      // 1. iOS 감지
-      if (/iPhone|iPad|iPod/i.test(ua) && !window.MSStream) {
-        window.location.href = "https://apps.apple.com/app/id6801701370";
-      } 
-      // 2. 안드로이드 감지 (Intent 스킴 적용)
-      else if (/android/i.test(ua)) {
-        var intentUrl = "intent://details?id=" + packageName + "#Intent;scheme=market;package=com.android.vending;end;";
-        var webUrl = "https://play.google.com/store/apps/details?id=" + packageName;
 
         try {
           window.location.href = intentUrl;
@@ -37,24 +28,8 @@
       } 
       // 3. PC 환경
       else {
-        window.location.href = "https://www.pang2chocolate.com/";
+        window.location.href = "https://app.pang2.kr/";
       }
-    })();
-  </script>
-</head>
-<body>
-  <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
-    <p>스토어로 이동 중입니다...</p>
-    <p style="font-size: 13px; color: #888;">
-      자동으로 이동하지 않을 경우 
-      <a id="manual-link" href="https://play.google.com/store/apps/details?id=com.pang2chocolate.pang2chocolate" style="color: #0066cc;">여기</a>를 눌러주세요.
-    </p>
-  </div>
-
-  <script>
-    if (/android/i.test(navigator.userAgent)) {
-      document.getElementById("manual-link").href = "intent://details?id=com.pang2chocolate.pang2chocolate#Intent;scheme=market;package=com.android.vending;end;";
-    }
   </script>
 </body>
 </html>
